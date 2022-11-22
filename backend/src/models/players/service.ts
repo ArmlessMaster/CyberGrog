@@ -1,11 +1,14 @@
 import { Schema } from "mongoose";
 
 import PlayerModel from "./model";
+import GameModel from "../games/model";
 import token from "../../utils/token";
 import IPlayer from "./interface";
+import IGame from "../games/interface";
 
 class PlayerService {
   private player = PlayerModel;
+  private game = GameModel;
 
   public async login(email: string, password: string): Promise<string | Error> {
     try {
@@ -212,6 +215,27 @@ class PlayerService {
       }
 
       return player;
+    } catch (error) {
+      throw new Error("Unable to get player account");
+    }
+  }
+
+  public async getPlayerLastGame(_id: Schema.Types.ObjectId): Promise<IPlayer | Error> {
+    try {
+      const player = await this.player
+        .findById(_id)
+        .populate({ path: "game", populate: { path: "_id" } })
+        .select("-password") as any;
+
+      if (!player) {
+        throw new Error("No logged in player account");
+      }
+
+      const gamesArr = player.game as any;
+      
+      const lastGame = gamesArr[player.game.length - 1];
+
+      return lastGame;
     } catch (error) {
       throw new Error("Unable to get player account");
     }

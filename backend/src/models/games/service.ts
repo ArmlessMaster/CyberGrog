@@ -78,24 +78,6 @@ class GameService {
     }
   }
 
-  public async getLastGame(): Promise<IGame | Array<IGame> | Error> {
-    try {
-      const game = await this.game
-        .find({}, null, {
-          sort: { createdAt: -1 },
-        })
-        .limit(1);
-
-      if (!game) {
-        throw new Error("Unable to find games");
-      }
-
-      return game;
-    } catch (error) {
-      throw new Error("Unable to find games");
-    }
-  }
-
   public async getGame(_id: Schema.Types.ObjectId): Promise<IGame | Array<IGame> | Error> {
     try {
       const game = await this.game.findById(_id);

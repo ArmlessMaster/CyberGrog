@@ -27,7 +27,7 @@ class GameController implements IController {
     this.router.put(
       `${this.path}/push`,
       validationMiddleware(validate.pushRatesGame),
-      //authenticatedMiddleware,
+      authenticatedMiddleware,
       this.pushRatesGame
     );
 
@@ -36,12 +36,6 @@ class GameController implements IController {
         validationMiddleware(validate.getGames),
         authenticatedMiddleware, 
         this.getGames
-    );
-
-    this.router.get(
-      `${this.path}/last`,
-      authenticatedMiddleware,
-      this.getLastGame
     );
 
     this.router.get(
@@ -126,20 +120,6 @@ class GameController implements IController {
       res.status(200).json({ game });
     } catch (error) {
       next(new HttpException(400, "Cannot found games"));
-    }
-  };
-
-  private getLastGame = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response | void> => {
-    try {
-      const game = await this.GameService.getLastGame();
-
-      res.status(200).json({ game });
-    } catch (error) {
-      next(new HttpException(400, "Cannot found last game"));
     }
   };
 

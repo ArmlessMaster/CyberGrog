@@ -75,6 +75,12 @@ class PlayerController implements IController {
       this.getMe
     );
 
+    this.router.get(
+      `${this.path}/last`,
+      authenticatedMiddleware, 
+      this.getPlayerLastGame
+    );
+
     this.router.delete(
       `${this.path}/delete`,
       validationMiddleware(validate.deletePlayer),
@@ -229,6 +235,22 @@ class PlayerController implements IController {
       const player = await this.PlayerService.getPlayer(_id);
 
       res.status(200).json({ player });
+    } catch (error) {
+      next(new HttpException(400, "Cannot found player"));
+    }
+  };
+
+  private getPlayerLastGame = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    try {
+      const _id = req.player._id;
+
+      const game = await this.PlayerService.getPlayerLastGame(_id);
+
+      res.status(200).json({ game });
     } catch (error) {
       next(new HttpException(400, "Cannot found player"));
     }
