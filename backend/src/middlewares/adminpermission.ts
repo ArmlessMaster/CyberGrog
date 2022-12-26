@@ -6,19 +6,17 @@ import PlayerModel from "../models/players/model";
 import { IToken } from "../utils/interfaces";
 import HttpException from "../utils/exception";
 
-async function authenticatedMiddleware(
+async function adminPermissionMiddleware(
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<Response | void> {
   const bearer = req.headers.authorization;
-
   if (!bearer || !bearer.startsWith("Bearer ")) {
     return next(new HttpException(401, "Unauthorised"));
   }
 
   const accessToken = bearer.split("Bearer ")[1].trim();
-
   try {
     const payload: IToken | jwt.JsonWebTokenError = await token.verifyToken(
       accessToken
@@ -28,15 +26,13 @@ async function authenticatedMiddleware(
       return next(new HttpException(401, "Unauthorised"));
     }
 
-    const player = await PlayerModel.findById(payload.id)
-      .select("-password")
-      .exec();
+    const account = await PlayerModel.findById(payload.id).exec();
 
-    if (!player) {
+    if (!account) {
       return next(new HttpException(401, "Unauthorised"));
+    } else if (account.role !== "Admin" && account.role !== "Moderator") {
+      return next(new HttpException(401, "Access is denied"));
     }
-
-    req.player = player;
 
     return next();
   } catch (error) {
@@ -44,4 +40,4 @@ async function authenticatedMiddleware(
   }
 }
 
-export default authenticatedMiddleware;
+export default adminPermissionMiddleware;

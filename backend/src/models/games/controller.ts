@@ -3,8 +3,11 @@ import { Router, Request, Response, NextFunction } from "express";
 import { IController } from "../../utils/interfaces";
 import HttpException from "../../utils/exception";
 import GameService from "./service";
-import validate from './validation';
-import { authenticatedMiddleware, validationMiddleware } from "../../middlewares";
+import validate from "./validation";
+import {
+  authenticatedMiddleware,
+  validationMiddleware,
+} from "../../middlewares";
 import Props from "../../utils/props";
 
 class GameController implements IController {
@@ -24,24 +27,17 @@ class GameController implements IController {
       this.createGame
     );
 
-    this.router.put(
-      `${this.path}/push`,
-      validationMiddleware(validate.pushRatesGame),
-      authenticatedMiddleware,
-      this.pushRatesGame
-    );
-
     this.router.get(
-        `${this.path}/get`, 
-        validationMiddleware(validate.getGames),
-        authenticatedMiddleware, 
-        this.getGames
+      `${this.path}/get`,
+      validationMiddleware(validate.getGames),
+      authenticatedMiddleware,
+      this.getGames
     );
 
     this.router.get(
       `${this.path}/one`,
       validationMiddleware(validate.getGame),
-      authenticatedMiddleware, 
+      authenticatedMiddleware,
       this.getGame
     );
 
@@ -59,51 +55,28 @@ class GameController implements IController {
     next: NextFunction
   ): Promise<Response | void> => {
     try {
+      const _id = req.player._id;
+
       const {
         HeartbeatRate,
         BreathRate,
         VascularPressureRateSystolic,
         VascularPressureRateDiastolic,
+        gameId,
       } = req.body;
 
       const game = await this.GameService.createGame(
+        _id,
         HeartbeatRate,
         BreathRate,
         VascularPressureRateSystolic,
-        VascularPressureRateDiastolic
+        VascularPressureRateDiastolic,
+        gameId
       );
 
       res.status(201).json({ game });
     } catch (error) {
       next(new HttpException(400, "Cannot create game"));
-    }
-  };
-
-  private pushRatesGame = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response | void> => {
-    try {
-      const {
-        _id,
-        HeartbeatRate,
-        BreathRate,
-        VascularPressureRateSystolic,
-        VascularPressureRateDiastolic,
-      } = req.body;
-
-      const game = await this.GameService.pushRatesGame(
-        _id,
-        HeartbeatRate,
-        BreathRate,
-        VascularPressureRateSystolic,
-        VascularPressureRateDiastolic
-      );
-
-      res.status(200).json({ game });
-    } catch (error) {
-      next(new HttpException(400, "Cannot update game"));
     }
   };
 
@@ -129,9 +102,8 @@ class GameController implements IController {
     next: NextFunction
   ): Promise<Response | void> => {
     try {
-      const _id = req.body;
-
-      const game = await this.GameService.getGame(_id);
+      const { gameId } = req.body;
+      const game = await this.GameService.getGame(gameId);
 
       res.status(200).json({ game });
     } catch (error) {
@@ -145,9 +117,9 @@ class GameController implements IController {
     next: NextFunction
   ): Promise<Response | void> => {
     try {
-      const { _id } = req.body;
+      const { _id, gameId } = req.body;
 
-      const game = await this.GameService.deleteGame(_id);
+      const game = await this.GameService.deleteGame(_id, gameId);
 
       res.status(200).json({ game });
     } catch (error) {

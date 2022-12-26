@@ -12,23 +12,37 @@ const PlayerSchema = new Schema(
       required: true,
       validate: [validator.isEmail, "Invalid email"],
       unique: true,
-      trim: true
+      trim: true,
     },
     password: {
-      type: String
+      type: String,
     },
-    isSubscribe: {
-      type: Boolean,
-      default: false,
-      required: true
+    nickname: {
+      type: String,
+    },
+    region: {
+      type: String,
+    },
+    role: {
+      type: String,
+      default: "User",
+      enum: ["User", "Admin", "Moderator"],
     },
     subscribeTime: {
-      type: Date
+      type: Date,
     },
-    game: [{ type: Schema.Types.ObjectId, ref: "Games" }]
+    paymentKeys: {
+      type: Array<string>,
+      default: [],
+    },
+    allPaymentKeys: {
+      type: Array<string>,
+      default: [],
+    },
+    game: [{ type: Number, ref: "Games" }],
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
@@ -44,9 +58,15 @@ PlayerSchema.pre<IPlayer>("save", async function (next) {
   next();
 });
 
+PlayerSchema.methods.isValidPremium = async function (): Promise<
+  Error | boolean
+> {
+  return new Date(Date.now()) < this.subscribeTime;
+};
+
 PlayerSchema.pre<IPlayer>("findOneAndUpdate", async function (this) {
   const update: any = { ...this.getUpdate() };
-  
+
   if (update.password) {
     update.password = await generatePasswordHash(update.password);
     this.setUpdate(update);

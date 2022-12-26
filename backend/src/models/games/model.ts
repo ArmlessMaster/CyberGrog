@@ -6,27 +6,28 @@ const GameSchema = new Schema(
   {
     HeartbeatRate: [
       {
-        type: Number
+        type: Number,
       },
     ],
     BreathRate: [
       {
-        type: Number
+        type: Number,
       },
     ],
     VascularPressureRateSystolic: [
       {
-        type: Number
+        type: Number,
       },
     ],
     VascularPressureRateDiastolic: [
       {
-        type: Number
+        type: Number,
       },
-    ]
+    ],
+    gameId: { type: Number },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 

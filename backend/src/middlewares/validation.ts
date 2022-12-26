@@ -30,6 +30,7 @@ function validationMiddleware(schema: Joi.Schema): RequestHandler {
       if (!(Object.keys(req.params).length === 0)) {
         data = req.params;
       }
+      console.log(req.query);
       const value = await schema.validateAsync(data, validationOptions);
       req.body = value;
       next();

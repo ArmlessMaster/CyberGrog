@@ -10,53 +10,55 @@ class GameService {
   private player = PlayerModel;
 
   public async createGame(
-    HeartbeatRate: Array<Number>,
-    BreathRate: Array<Number>,
-    VascularPressureRateSystolic: Array<Number>,
-    VascularPressureRateDiastolic: Array<Number>
-  ): Promise<IGame | Error> {
-    try {
-      const game = await this.game.create({
-        HeartbeatRate,
-        BreathRate,
-        VascularPressureRateSystolic,
-        VascularPressureRateDiastolic
-      });
-
-      return game;
-    } catch (error) {
-      throw new Error("Unable to create game");
-    }
-  }
-
-  public async pushRatesGame(
     _id: Schema.Types.ObjectId,
     HeartbeatRate: Array<Number>,
     BreathRate: Array<Number>,
     VascularPressureRateSystolic: Array<Number>,
-    VascularPressureRateDiastolic: Array<Number>
+    VascularPressureRateDiastolic: Array<Number>,
+    gameId: Number
   ): Promise<IGame | Error> {
     try {
-      const game = await this.game.findByIdAndUpdate(
-        { _id },
-        {
-          $push: {
-            HeartbeatRate: HeartbeatRate,
-            BreathRate: BreathRate,
-            VascularPressureRateSystolic: VascularPressureRateSystolic,
-            VascularPressureRateDiastolic: VascularPressureRateDiastolic
+      const game1 = await this.game.findOne({ gameId: gameId });
+      let game = {} as IGame;
+      if (game1 === null) {
+        game = await this.game.create({
+          HeartbeatRate,
+          BreathRate,
+          VascularPressureRateSystolic,
+          VascularPressureRateDiastolic,
+          gameId,
+        });
+        await this.player.findByIdAndUpdate(
+          { _id },
+          {
+            $push: {
+              game: gameId,
+            },
           },
-        },
-        { new: true }
-      );
+          { new: true }
+        );
+      } else {
+        game = (await this.game.findOneAndUpdate(
+          { gameId },
+          {
+            $push: {
+              HeartbeatRate: HeartbeatRate,
+              BreathRate: BreathRate,
+              VascularPressureRateSystolic: VascularPressureRateSystolic,
+              VascularPressureRateDiastolic: VascularPressureRateDiastolic,
+            },
+          },
+          { new: true }
+        )) as IGame;
 
-      if (!game) {
-        throw new Error("Unable to update game with thad id");
+        if (!game) {
+          throw new Error("Unable to update game with thad id");
+        }
       }
 
       return game;
     } catch (error) {
-      throw new Error("Unable to update game");
+      throw new Error("Unable to create game");
     }
   }
 
@@ -78,9 +80,9 @@ class GameService {
     }
   }
 
-  public async getGame(_id: Schema.Types.ObjectId): Promise<IGame | Array<IGame> | Error> {
+  public async getGame(gameId: Number): Promise<IGame | Array<IGame> | Error> {
     try {
-      const game = await this.game.findById(_id);
+      const game = await this.game.findOne({ gameId: gameId });
 
       if (!game) {
         throw new Error("Unable to find game");
@@ -92,15 +94,25 @@ class GameService {
     }
   }
 
-  public async deleteGame(_id: Schema.Types.ObjectId): Promise<IGame | Error> {
+  public async deleteGame(
+    _id: Schema.Types.ObjectId,
+    gameId: Number
+  ): Promise<IGame | Error> {
     try {
       const game = await this.game.findByIdAndDelete(_id);
+      const player = await this.player.find({});
 
       if (!game) {
         throw new Error("Unable to delete game with that id");
       }
-
-      await this.player.updateMany({game: _id}, {$pull: {game: _id}});
+      Promise.all(
+        player.map(async (item) => {
+          await this.player.updateOne(
+            { _id: item._id },
+            { $pull: { game: gameId } }
+          );
+        })
+      );
 
       return game;
     } catch (error) {

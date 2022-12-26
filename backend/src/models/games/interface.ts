@@ -5,4 +5,5 @@ export default interface IGame extends Document {
   BreathRate: Array<Number>;
   VascularPressureRateSystolic: Array<Number>;
   VascularPressureRateDiastolic: Array<Number>;
+  gameId: Number;
 }
