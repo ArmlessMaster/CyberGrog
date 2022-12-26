@@ -1,0 +1,101 @@
+.subscribe {
+    .row_subscribe {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        align-content: center;
+        justify-content: space-around;
+        margin-top: 14%;
+        .block {
+            width: 20%;
+            .subscribe_block {
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                .subscribe_block-month {
+                    font-size: 2.5vw;
+                    font-weight: 700;
+                    line-height: 2.917vw;
+                    display: flex;
+                    justify-content: center;
+                    margin-left: 0.2vw;
+                    padding-left: 0.4vw;
+                    padding-right: 0.4vw;
+                    background-color: #00ff37ef;
+                }
+                .subscribe_block-halfyear {
+                    font-size: 2.5vw;
+                    font-weight: 700;
+                    line-height: 2.917vw;
+                    display: flex;
+                    justify-content: center;
+                    margin-left: 0.2vw;
+                    padding-left: 0.4vw;
+                    padding-right: 0.4vw;
+                    background-color: #0099ffef;
+                }
+                .subscribe_block-year {
+                    font-size: 2.5vw;
+                    font-weight: 700;
+                    line-height: 2.917vw;
+                    display: flex;
+                    justify-content: center;
+                    margin-left: 0.2vw;
+                    padding-left: 0.4vw;
+                    padding-right: 0.4vw;
+                    background-color: #cc00ffef;
+                }
+                h3 {
+                    margin-top: 1.5vw;
+                    font-size: 2vw;
+                    font-weight: 700;
+                    line-height: 2.917vw;
+                    display: flex;
+                    justify-content: center;
+                    span {
+                        margin-left: 0.2vw;
+                        padding-left: 0.4vw;
+                        padding-right: 0.4vw;
+                        background-color: #f34444;
+                    }
+                }
+                p {
+                    margin-top: 0.6vw;
+                    font-size: 1vw;
+                    font-weight: 300;
+                    line-height: 1vw;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .button {
+                    text-transform: uppercase;
+                    margin-top: 1.5vw;
+                    font-weight: 500;
+                    font-size: 0.7vw;
+                    letter-spacing: 0.005vw;
+                    width: 100%;
+                    color: rgb(158, 153, 153);
+                    background-color: black;
+                }
+
+                .button:hover {
+                    border: none;
+                    outline: none;
+                    color: white;
+                    background-color: rgb(26, 25, 25);
+                }
+            }
+        }
+    }
+    .background_subscribe {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+}

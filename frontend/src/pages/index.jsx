@@ -1,0 +1,11 @@
+export { default as ChangePassword } from "./ChangePassword";
+export { default as Main } from "./Main";
+export { default as Manual } from "./Manual";
+export { default as Subscribe } from "./CyberGrog+";
+export { default as Success } from "./PaymentStatus/Success";
+export { default as Canceled } from "./PaymentStatus/Canceled";
+export { default as LoginForm } from "./LoginForm";
+export { default as RegisterForm } from "./RegisterForm";
+export { default as ChangeData } from "./ChangeData";
+export { default as Account } from "./Account";
+export { default as Game } from "./Game";

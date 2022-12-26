@@ -1,0 +1,56 @@
+.background_manual {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.container_manual {
+    margin-left: 3.646vw;
+    justify-content: left;
+    text-align: left;
+    padding-top: 10vw;
+    margin-left: 3.646vw;
+}
+
+.logo_manual {
+    width: 100%;
+    height: 100%;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 3.333vw;
+    line-height: 3.125vw;
+    display: flex;
+    justify-content: center;
+    color: #000000;
+    margin-bottom: 1.198vw;
+}
+
+.rectangl_manual {
+    position: absolute;
+    width: 50vw;
+    height: 1vw;
+    left: 26vw;
+    top: 14vw;
+    background: #666262;
+    z-index: -1;
+}
+
+.container_information_manual {
+    margin-top: 7vw;
+}
+
+.information_logo_manual {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2vw;
+    color: #000000;
+    p {
+        margin-top: 1vw;
+    }
+}

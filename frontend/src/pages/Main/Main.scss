@@ -1,0 +1,86 @@
+.background_main {
+  position: fixed;
+  top: 2.5vw;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.container_main {
+  margin-left: 3.646vw;
+  justify-content: left;
+  text-align: left;
+  padding-top: 7vw;
+  margin-left: 3.646vw;
+}
+
+.logo_main {
+  width: 100%;
+  height: 100%;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 3.333vw;
+  line-height: 3.125vw;
+  display: flex;
+  justify-content: center;
+  color: #000000;
+  margin-bottom: 1.198vw;
+  p {
+    span {
+      background-color: #c0a2a2c0;
+      padding-left: 0.3vw;
+      padding-right: 0.3vw;
+    }
+  }
+}
+
+.container_information_main {
+  margin-top: 10vw;
+}
+
+.information_text_main {
+  width: 100%;
+  height: 100%;
+  font-family: "Roboto";
+  font-style: normal;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  color: #000000;
+  font-size: 1.7vw;
+  margin-bottom: 1vw;
+  p {
+    span {
+      background-color: #c0a2a2c0;
+      padding-left: 0.3vw;
+      padding-right: 0.3vw;
+    }
+  }
+}
+
+.container_button_main {
+  margin-top: 7vw;
+}
+
+.button_main {
+  display: flex;
+  justify-content: center;
+  .button {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1vw;
+    letter-spacing: 0.005vw;
+    color: rgb(158, 153, 153);
+    background-color: black;
+    height: 3vw;
+    width: 8vw;
+  }
+
+  .button:hover {
+    color: white;
+    background-color: rgb(26, 25, 25);
+  }
+}

@@ -1,0 +1,83 @@
+.header {
+  font-family: "Roboto";
+
+  .header__wrapper {
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    height: 2.8vw;
+    background-color: black;
+    justify-content: space-between;
+    color: rgb(158, 153, 153);
+    font-weight: 500;
+    line-height: 2.917vw;
+    display: flex;
+    z-index: 4;
+    .header__logo {
+      padding-left: 2vw;
+      flex: 2;
+      font-size: 1.875vw;
+      font-weight: 700;
+    }
+    .header__menu {
+      justify-content: center;
+      display: flex;
+      font-size: 1.042vw;
+      flex: 15;
+
+      li + li {
+        margin-left: 4vw;
+      }
+      li {
+        position: relative;
+        cursor: pointer;
+        color: rgb(158, 153, 153);
+        background-color: transparent;
+      }
+      li:hover {
+        color: #fff;
+        transition: 0.3s ease;
+      }
+    }
+    .header__btns {
+      display: flex;
+      margin-top: 0.5vw;
+      justify-content: space-evenly;
+      margin-right: 1vw;
+      position: relative;
+      flex: 2.5;
+      .language-select {
+        background-color: transparent;
+        color: rgb(158, 153, 153);
+        border: transparent;
+        font-size: 0.742vw;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 6vw;
+        outline: none;
+        margin-top: -0.3vw;
+        option {
+          border: transparent;
+          font-weight: 700;
+          font-size: 0.742vw;
+          background-color: rgb(44, 44, 44);
+        }
+      }
+      .language-select:hover {
+        color: #fff;
+        transition: 0.3s ease;
+        option {
+          color: rgb(158, 153, 153);
+        }
+      }
+      .header__btns-wrapper {
+        display: flex;
+        margin-left: 0.5vw;
+        z-index: 4;
+      }
+      .header__btns-wrapper:last-child {
+        width: 1.5vw;
+      }
+    }
+  }
+}

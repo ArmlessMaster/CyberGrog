@@ -1,0 +1,185 @@
+.game {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+
+    .game__content {
+        .block {
+            margin-top: 5vw;
+            margin-bottom: 2.5vw;
+            padding: 2.25vw;
+            background: #ffffff;
+            box-shadow: 0vw 0vw 1.25vw rgba(0, 0, 0, 0.04204);
+            border-radius: 0.15vw;
+            width: 75vw;
+            height: 67.5vw;
+        }
+
+        .background_game {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .alldata_game:first-child {
+            margin-top: 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 18.5vw auto;
+            grid-gap: 0.4vw;
+            padding: 0.4vw;
+        }
+        div {
+            padding: 0.25vw;
+            font-size: 1.2vw;
+        }
+        .box-1 {
+            grid-row-start: 1;
+            grid-row-end: 4;
+            border-right: 0.1vw solid;
+
+            .header_game {
+                display: block;
+                margin-bottom: 0.5vw;
+                border-bottom: 0.05vw dotted;
+                h2 {
+                    font-size: 1.3vw;
+                }
+                img {
+                    width: 4vw;
+                    height: 4vw;
+                    border: 0.05vw solid #fff;
+                    margin-right: 1vw;
+                }
+                .header_game-content {
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                }
+                .header_game-tittle {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.3vw;
+                    font-weight: 600;
+                }
+            }
+            .runs_game {
+                display: block;
+                margin-bottom: 0.5vw;
+                border-bottom: 0.05vw dotted;
+                .runs {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.3vw;
+                    font-weight: 600;
+                }
+            }
+
+            .active_runs {
+                display: flex;
+                margin-bottom: 0.5vw;
+                border-bottom: 0.05vw dotted;
+                img {
+                    width: 2.5vw;
+                    height: 2.5vw;
+                    border: 0.05vw solid #fff;
+                    margin-right: 1vw;
+                }
+                h2 {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+            }
+            .active_spells {
+                display: flex;
+                justify-content: space-around;
+
+                img {
+                    width: 3.5vw;
+                    height: 3.5vw;
+                    border: 0.05vw solid #fff;
+                }
+            }
+
+            .footer_game {
+                margin-top: 0.75vw;
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                margin-bottom: 0.5vw;
+                border-bottom: 0.05vw dotted;
+                h2 {
+                    font-size: 1.3vw;
+                }
+            }
+
+            .footer_game-button {
+                .button {
+                    text-transform: uppercase;
+                    margin-top: 1.5vw;
+                    font-weight: 500;
+                    font-size: 0.7vw;
+                    letter-spacing: 0.005vw;
+                    width: 100%;
+                    color: rgb(158, 153, 153);
+                    background-color: black;
+                }
+                .button:hover {
+                    border: none;
+                    outline: none;
+                    color: white;
+                    background-color: rgb(26, 25, 25);
+                }
+            }
+        }
+
+        .no_sub_game {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 0.25vw;
+            height: 20vw;
+            font-size: 2vw;
+            font-weight: 500;
+            color: rgb(177, 66, 66);
+            text-align: center;
+        }
+    }
+}
+
+.game_unactive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .background_game {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+    .no_active_game {
+        font-size: 5vw;
+        margin-top: 20%;
+        font-family: "Roboto";
+    }
+}
+
+.canvasjs-chart-credit {
+    display: none;
+}

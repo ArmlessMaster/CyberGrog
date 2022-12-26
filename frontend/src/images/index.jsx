@@ -1,0 +1,11 @@
+export { default as MainBackground } from "./main/main.jpg";
+export { default as dotSvg } from "./icons/backgroundSvg/DotGrid.svg";
+export { default as EmblemBronze } from "./rangs/Emblem_Bronze.png";
+export { default as EmblemChallenger } from "./rangs/Emblem_Challenger.png";
+export { default as EmblemDiamond } from "./rangs/Emblem_Diamond.png";
+export { default as EmblemGold } from "./rangs/Emblem_Gold.png";
+export { default as EmblemGrandMaster } from "./rangs/Emblem_Grandmaster.png";
+export { default as EmblemIron } from "./rangs/Emblem_Iron.png";
+export { default as EmblemMaster } from "./rangs/Emblem_Master.png";
+export { default as EmblemPlatinum } from "./rangs/Emblem_Platinum.png";
+export { default as EmblemSilver } from "./rangs/Emblem_Silver.png";
